@@ -110,7 +110,7 @@ def mergesort(table):
       
 
 
-def mergesortplus(table):
+def mergesortplus(table, main_lenght):
    count_e, count_p = 0,0
    def sort(table_a, table_b):
       nonlocal count_e, count_p
@@ -155,8 +155,11 @@ def mergesortplus(table):
          count_e += 2
       return table
    middle = len(table) // 2
-   sort(mergesort(table[:middle]), mergesort(table[middle:]))
-   return (count_p, count_e)
+   if(len(table) == main_lenght):
+      sort(mergesort(table[:middle]), mergesort(table[middle:]))
+      return (count_p, count_e)
+   else:
+      return sort(mergesort(table[:middle]), mergesort(table[middle:]))
 
 
 # print(main_table)
@@ -204,7 +207,7 @@ def mergesort21(table):
       
 
 
-def mergesort21plus(table):
+def mergesort21plus(table, main_lenght):
    count_e, count_p = 0,0
    def sort(table_a, table_b):
       nonlocal count_e, count_p
@@ -249,8 +252,11 @@ def mergesort21plus(table):
          count_e += 2
       return table
    middle = len(table) // 2
-   sort(mergesort(table[:middle]), mergesort(table[middle:]))
-   return (count_p, count_e)
+   if(len(table) == main_lenght):
+      sort(mergesort(table[:middle]), mergesort(table[middle:]))
+      return (count_p, count_e)
+   else:
+      return sort(mergesort(table[:middle]), mergesort(table[middle:]))
 
 
 # print(main_table)
@@ -274,11 +280,11 @@ def tests(size = 20):
    end = time.time()
    results[1].append(end-start)
    start = time.time()
-   results.append([size, mergesortplus(copy3), "mergesort"])
+   results.append([size, mergesortplus(copy3, len(copy3)), "mergesort"])
    end = time.time()
    results[2].append(end-start)
    start = time.time()
-   results.append([size, mergesort21plus(main_table), "mergesort21"])
+   results.append([size, mergesort21plus(main_table, len(main_table)), "mergesort21"])
    end = time.time()
    results[3].append(end-start)
 
