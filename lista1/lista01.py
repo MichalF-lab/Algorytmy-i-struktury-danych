@@ -240,8 +240,8 @@ def mergesort21plus(table, main_lenght):
             count_e += 1
          else:
             new_table[index] = table_b[index_b]
-            count_e += 1
             index_b += 1
+            count_e += 1
       return new_table
    
    if(len(table) == 1): return table
