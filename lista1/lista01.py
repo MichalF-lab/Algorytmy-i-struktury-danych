@@ -263,7 +263,7 @@ def mergesort21plus(table, main_lenght):
 # print(mergesort21plus(main_table))
 
  #--------------------------------------------------------------------------
-def tests(size = 20):
+def tests(size = 6000):
       
    main_table = numpy.arange(size)
    for item in main_table:
@@ -290,4 +290,4 @@ def tests(size = 20):
 
    return results
 
-print(tests(6000))
+#print(tests(6000))
