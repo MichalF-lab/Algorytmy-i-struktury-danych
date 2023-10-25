@@ -156,10 +156,10 @@ def mergesortplus(table, main_lenght):
       return table
    middle = len(table) // 2
    if(len(table) == main_lenght):
-      sort(mergesort(table[:middle]), mergesort(table[middle:]))
+      sort(mergesortplus(table[:middle], main_lenght), mergesortplus(table[middle:], main_lenght))
       return (count_p, count_e)
    else:
-      return sort(mergesortplus(table[:middle], main_lenght), mergesortplus(table[middle:]),main_lenght)
+      return sort(mergesortplus(table[:middle], main_lenght), mergesortplus(table[middle:],main_lenght))
 
 
 # print(main_table)
@@ -205,7 +205,6 @@ def mergesort21(table):
    middle = len(table) // 3
    return sort(mergesort21(table[:middle]), mergesort21(table[middle:]))
       
-
 
 def mergesort21plus(table, main_lenght):
    count_e, count_p = 0,0
@@ -253,10 +252,10 @@ def mergesort21plus(table, main_lenght):
       return table
    middle = len(table) // 3
    if(len(table) == main_lenght):
-      sort(mergesort(table[:middle]), mergesort(table[middle:]))
+      sort(mergesort21plus(table[:middle], main_lenght), mergesort21plus(table[middle:], main_lenght))
       return (count_p, count_e)
    else:
-      return sort(mergesort21plus(table[:middle], main_lenght), mergesort21plus(table[middle:]), main_lenght)
+      return sort(mergesort21plus(table[:middle], main_lenght), mergesort21plus(table[middle:], main_lenght))
 
 
 # print(main_table)
@@ -290,4 +289,4 @@ def tests(size = 6000):
 
    return results
 
-#print(tests())
+print(tests())
