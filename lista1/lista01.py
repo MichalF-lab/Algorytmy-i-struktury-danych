@@ -159,7 +159,7 @@ def mergesortplus(table, main_lenght):
       sort(mergesort(table[:middle]), mergesort(table[middle:]))
       return (count_p, count_e)
    else:
-      return sort(mergesort(table[:middle]), mergesort(table[middle:]))
+      return sort(mergesortplus(table[:middle], main_lenght), mergesortplus(table[middle:]),main_lenght)
 
 
 # print(main_table)
@@ -203,7 +203,7 @@ def mergesort21(table):
          table[0], table[1] = table[1], table[0]
       return table
    middle = len(table) // 3
-   return sort(mergesort(table[:middle]), mergesort(table[middle:]))
+   return sort(mergesort21(table[:middle]), mergesort21(table[middle:]))
       
 
 
@@ -251,12 +251,12 @@ def mergesort21plus(table, main_lenght):
          table[0], table[1] = table[1], table[0]
          count_e += 2
       return table
-   middle = len(table) // 2
+   middle = len(table) // 3
    if(len(table) == main_lenght):
       sort(mergesort(table[:middle]), mergesort(table[middle:]))
       return (count_p, count_e)
    else:
-      return sort(mergesort(table[:middle]), mergesort(table[middle:]))
+      return sort(mergesort21plus(table[:middle], main_lenght), mergesort21plus(table[middle:]), main_lenght)
 
 
 # print(main_table)
@@ -267,7 +267,7 @@ def tests(size = 6000):
       
    main_table = numpy.arange(size)
    for item in main_table:
-      main_table[item] = float(random.randint(1,400))
+      main_table[item] = float(random.randint(1,500))
    
    copy1, copy2, copy3 = numpy.copy(main_table), numpy.copy(main_table), numpy.copy(main_table)
    results = []
@@ -290,4 +290,4 @@ def tests(size = 6000):
 
    return results
 
-#print(tests(6000))
+#print(tests())
