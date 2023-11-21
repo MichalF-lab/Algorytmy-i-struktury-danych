@@ -46,7 +46,7 @@ def insertionsortplus(table):
 
 
 def bubblesort(table):
-   for item in range(1,len(table)):
+   for item in range(1,len(table):
       for i in range(len(table)-item,0,-1):
          if(table[i] < table[i-1]):
             table[i], table[i-1] = table[i-1], table[i]
@@ -65,7 +65,7 @@ def bubblesortplus(table):
 
 
 # print(main_table)
-# print(bubblesortplus(main_table))
+print(bubblesort([3,2,1]))
 
 
 #------------------------------------------------------------------
@@ -289,4 +289,4 @@ def tests(size = 6000):
 
    return results
 
-print(tests())
+#print(tests())
