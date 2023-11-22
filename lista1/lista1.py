@@ -289,4 +289,8 @@ def tests(size = 6000):
 
    return results
 
+<<<<<<< HEAD:lista1/lista01.py
 #print(tests())
+=======
+# print(tests())
+>>>>>>> 7dd97397c99bc55a9a3f8d44a7305532dcc9bd65:lista1/lista1.py
