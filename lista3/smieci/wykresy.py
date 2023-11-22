@@ -1,3 +1,8 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import time
+
+# Funkcje sortujące
 import random
 import numpy
 import time
@@ -325,11 +330,83 @@ def heapsort3_plus(tab):
     return count_e, count_p
 #-------------------------------------------------------------------------
 
-if __name__ == '__main__':
-    a = 10
-    # print(main_table)
-    print(quicksort3_plus(main_table))
-    print(main_table)
-    print(heapsort3_plus(main_table))
-    print(heapsort_plus(main_table))
-    print(quicksort3(main_table) == heapsort3(main_table))
+# if __name__ == '__main__':
+#     a = 10
+#     # print(main_table)
+#     print(quicksort3_plus(main_table))
+#     print(main_table)
+#     print(heapsort3_plus(main_table))
+#     print(heapsort_plus(main_table))
+#     print(quicksort3(main_table) == heapsort3(main_table))
+
+def generate_random_data(size):
+    return [float(random.randint(1, 100)) for _ in range(size)]
+
+def measure_algorithm(algorithm, sizes):
+    times = []
+    comparisons = []
+    assignments = []
+
+    for size in sizes:
+        data = generate_random_data(size)
+
+        start_time = time.time()
+        algorithm(data.copy())
+        end_time = time.time()
+        times.append(end_time - start_time)
+
+        comp, assign = algorithm(data)
+        comparisons.append(comp)
+        assignments.append(assign)
+
+    return times, comparisons, assignments
+
+# Testy
+
+sizes = [100, 500, 1000, 2000, 5000]
+
+heapsort3_times, heapsort3_comparisons, heapsort3_assignments = measure_algorithm(heapsort3, sizes)
+heapsort3_plus_times, heapsort3_plus_comparisons, heapsort3_plus_assignments = measure_algorithm(heapsort3_plus, sizes)
+heapsort_plus_times, heapsort_plus_comparisons, heapsort_plus_assignments = measure_algorithm(heapsort_plus, sizes)
+quicksort3_plus_times, quicksort3_plus_comparisons, quicksort3_plus_assignments = measure_algorithm(quicksort3_plus, sizes)
+
+# Wykresy
+
+plt.figure(figsize=(15, 10))
+
+# Czas wykonania
+plt.subplot(3, 1, 1)
+plt.plot(sizes, heapsort3_times, marker='o', label='heapsort3')
+plt.plot(sizes, heapsort3_plus_times, marker='o', label='heapsort3_plus')
+plt.plot(sizes, heapsort_plus_times, marker='o', label='heapsort_plus')
+plt.plot(sizes, quicksort3_plus_times, marker='o', label='quicksort3_plus')
+plt.title('Czas wykonania')
+plt.xlabel('Rozmiar danych')
+plt.ylabel('Czas (s)')
+plt.legend()
+
+# Liczba porównań
+plt.subplot(3, 1, 2)
+plt.plot(sizes, heapsort3_comparisons, marker='o', label='heapsort3')
+plt.plot(sizes, heapsort3_plus_comparisons, marker='o', label='heapsort3_plus')
+plt.plot(sizes, heapsort_plus_comparisons, marker='o', label='heapsort_plus')
+plt.plot(sizes, quicksort3_plus_comparisons, marker='o', label='quicksort3_plus')
+plt.title('Liczba porównań')
+plt.xlabel('Rozmiar danych')
+plt.ylabel('Liczba porównań')
+plt.legend()
+
+# Liczba przypisań
+plt.subplot(3, 1, 3)
+plt.plot(sizes, heapsort3_assignments, marker='o', label='heapsort3')
+plt.plot(sizes, heapsort3_plus_assignments, marker='o', label='heapsort3_plus')
+plt.plot(sizes, heapsort_plus_assignments, marker='o', label='heapsort_plus')
+plt.plot(sizes, quicksort3_plus_assignments, marker='o', label='quicksort3_plus')
+plt.title('Liczba przypisań')
+plt.xlabel('Rozmiar danych')
+plt.ylabel('Liczba przypisań')
+plt.legend()
+
+plt.tight_layout()
+plt.savefig('sorting_algorithms_analysis.pdf')
+plt.show()

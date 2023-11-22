@@ -1,3 +1,8 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import time
+
+# Funkcje sortujące
 import random
 import numpy
 import time
@@ -123,7 +128,9 @@ def quicksort3_plus(tab):
             return tab
         if (len(tab) == 2 ):
             count_e += 1
-            if (tab[0] < tab[1]): return tab
+            if (tab[0] < tab[1]): 
+                count_p += 2
+                return tab
             return [tab[1],tab[0]]
         
         a = tab[-1]
@@ -214,17 +221,17 @@ def heapsort_plus(tab):
 
             left = 2 * root + 1
             if left > lenght : return heap
-            count_e += 1
+            count_p += 1
             if heap[left] > heap[root]:
                 heap[left], heap[root] = heap[root], heap[left]
-                count_p += 2
+                count_e += 2
 
             right = 2 * root + 2
             if right > lenght : return heap
-            count_e += 1
+            count_p += 1
             if heap[right] > heap[root] and heap[right] > heap[left]:
                 heap[right], heap[root] = heap[root], heap[right]
-                count_p += 2
+                count_e += 2
 
 
 
@@ -325,11 +332,91 @@ def heapsort3_plus(tab):
     return count_e, count_p
 #-------------------------------------------------------------------------
 
-if __name__ == '__main__':
-    a = 10
-    # print(main_table)
-    print(quicksort3_plus(main_table))
-    print(main_table)
-    print(heapsort3_plus(main_table))
-    print(heapsort_plus(main_table))
-    print(quicksort3(main_table) == heapsort3(main_table))
+
+def generate_random_data(size):
+    return [float(random.randint(1, 100)) for _ in range(size)]
+def measure_algorithm(algorithm, sizes):
+    times = []
+    comparisons = []
+    assignments = []
+
+    for size in sizes:
+        data = generate_random_data(size)
+
+        start_time = time.time()
+
+        result = algorithm(data.copy())
+
+        end_time = time.time()
+        times.append(end_time - start_time)
+
+        if isinstance(result, tuple) and len(result) == 2:
+            comp, assign = result
+            comparisons.append(comp)
+            assignments.append(assign)
+        elif isinstance(result, int):
+            # Jeśli algorytm zwraca tylko jedną wartość (np. liczbę porównań), to ją dodajemy
+            comparisons.append(result)
+            assignments.append(0)
+        else:
+            # Jeśli zwraca coś innego, zakładamy, że nie ma informacji o porównaniach i przypisaniach
+            comparisons.append(0)
+            assignments.append(0)
+
+    return times, comparisons, assignments
+# Testy
+
+
+sizes = [1000, 2000, 3000, 4000, 5000]
+
+algorithms = [
+    #("heapsort3_plus", heapsort3_plus),
+    #("heapsort_plus", heapsort_plus),
+    #("quicksort3_plus", quicksort3_plus),
+    #("quicksort_plus", quicksort_plus)
+]
+
+results = {}
+
+for name, algorithm in algorithms:
+    times, comparisons, assignments = measure_algorithm(algorithm, sizes)
+    results[name] = {
+        "times": times,
+        "comparisons": comparisons,
+        "assignments": assignments
+    }
+
+# Wykresy
+
+plt.figure(figsize=(15, 10))
+
+# Czas wykonania
+plt.subplot(3, 1, 1)
+for name, result in results.items():
+    plt.plot(sizes, result["times"], marker='o', label=name)
+plt.title('Czas wykonania')
+plt.xlabel('Rozmiar danych')
+plt.ylabel('Czas (s)')
+plt.legend()
+
+# Liczba porównań
+plt.subplot(3, 1, 2)
+for name, result in results.items():
+    plt.plot(sizes, result["comparisons"], marker='o', label=name)
+plt.title('Liczba porównań')
+plt.xlabel('Rozmiar danych')
+plt.ylabel('Liczba porównań')
+plt.legend()
+
+# Liczba przypisań
+plt.subplot(3, 1, 3)
+for name, result in results.items():
+    plt.plot(sizes, result["assignments"], marker='o', label=name)
+plt.title('Liczba przypisań')
+plt.xlabel('Rozmiar danych')
+plt.ylabel('Liczba przypisań')
+plt.legend()
+
+plt.tight_layout()
+plt.savefig('sorting_algorithms_analysis_plus.pdf')
+plt.show()
