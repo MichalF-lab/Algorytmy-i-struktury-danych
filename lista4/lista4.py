@@ -13,7 +13,7 @@ def bucketsort(tab,count1 = 10):
     for item in tab:
         j = 0
         for i in numpy.arange(float(min(tab)),float(max(tab)),distance/count1):
-            print(i)
+            # print(i)
             if(item <= i):
                 indextab[j].append(item)
                 break
@@ -31,7 +31,7 @@ def bucketsort(tab,count1 = 10):
     return ext
 
 
-#print(bucketsort([0.9,0.2,0.34,0.22,0.9,0.0011,0.2112,0.31111],10))
+print(bucketsort([0.9,0.2,0.34,0.22,0.9,0.0011,0.2112,0.31111],10))
 
 def radixsort(tab, base = 10):
 
