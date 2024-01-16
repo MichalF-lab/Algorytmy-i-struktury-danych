@@ -124,7 +124,7 @@ if __name__ == '__main__':
         end_time = time.time()
         print(f"{nazwa_algorytmu}: {end_time - start_time:.6f} sekundy")
     
-    def test_sortowaniat(algorytm, tablica,anazwa_algorytmu):
+    def test_sortowaniat(algorytm, tablica,a,nazwa_algorytmu):
         start_time = time.time()
         algorytm(tablica,a)
         end_time = time.time()
