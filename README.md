@@ -31,3 +31,11 @@ Michał Frąckowiak 275951
 4. W funkcji lcs brakuje jakiegoś warunku zakończenia, pętla z linii 109 też powinna mieć jakieś zabezpieczenie na wypadek wyjścia poza tablicę. Przykładowo, funkcja rzuca błędem dla argumentów [1,2,3] i [1,2,3]. Poza tym wygląda, jakby szukała najdłuższego wspólnego spójnego podciągu, co jest innym problemem niż zakładany. 0pkt.
 5. Funkcja rzuca błędem dla argumentów [1,2,3] i [1,2,3] (pętla z linii 93 powinna też mieć jakieś zabezpieczenie na wypadek, gdy _y+temp wychodzi poza tablicę y, analogicznie x). Znowu tylko spójne podciągi. 1 pkt.
 6. To samo co w zadaniu 5. 1 pkt.
+
+## Lista 6 9 pkt.
+
+1. Brak uwag, 2 pkt.
+2. Dobrze by było, gdyby ta funkcja zwracała rozwiązanie problemu (jak te z zadania 3). 1 pkt.
+3. Brak uwag, 2 pkt.
+4. Brak uwag, 2 pkt.
+5. Brak uwag, 2 pkt.
